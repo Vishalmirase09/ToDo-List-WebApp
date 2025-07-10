@@ -82,10 +82,11 @@ const Navbar = ({ notifications, onMarkAsRead }) => {
           </ul>
 
           <div className="d-flex align-items-center">
-            <div className="position-relative">
+            <div className="position-relative notification-bell-container">
               <div
                 className="notification-bell text-white"
                 onClick={handleNotificationClick}
+                style={{ cursor: 'pointer', zIndex: 9998 }}
               >
                 <FaBell size={20} />
                 {unreadCount > 0 && (

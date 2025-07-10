@@ -42,7 +42,17 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
   const unreadNotifications = notifications.filter(n => !n.read);
 
   return (
-    <div ref={dropdownRef} className="notification-dropdown fade-in">
+    <div 
+      ref={dropdownRef} 
+      className="notification-dropdown fade-in"
+      style={{ 
+        position: 'absolute',
+        top: '100%',
+        right: 0,
+        zIndex: 9999,
+        marginTop: '8px'
+      }}
+    >
       <div className="d-flex justify-content-between align-items-center p-3 border-bottom">
         <h6 className="mb-0 fw-bold">Notifications</h6>
         <button
