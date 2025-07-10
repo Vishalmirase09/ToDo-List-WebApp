@@ -66,21 +66,46 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
         zIndex: 9999,
         width: '350px',
         maxWidth: '400px',
-        background: 'white',
-        borderRadius: '16px',
-        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
-        border: '1px solid rgba(0, 0, 0, 0.1)',
+        background: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderRadius: '24px',
+        boxShadow: '0 30px 80px rgba(0, 0, 0, 0.2)',
+        border: '1px solid rgba(255, 255, 255, 0.3)',
         maxHeight: '500px',
         overflowY: 'auto',
-        animation: 'fadeIn 0.3s ease-out'
+        animation: 'fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
       }}
     >
-      <div className="d-flex justify-content-between align-items-center p-3 border-bottom">
-        <h6 className="mb-0 fw-bold">Notifications</h6>
+      <div 
+        className="d-flex justify-content-between align-items-center p-4"
+        style={{ 
+          borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+          background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',
+          borderRadius: '24px 24px 0 0'
+        }}
+      >
+        <h6 className="mb-0 fw-bold" style={{ color: '#667eea' }}>
+          🔔 Notifications
+        </h6>
         <button
-          className="btn btn-sm btn-outline-secondary"
+          className="btn btn-sm"
           onClick={onClose}
-          style={{ border: 'none', background: 'transparent' }}
+          style={{ 
+            border: 'none', 
+            background: 'rgba(102, 126, 234, 0.1)',
+            borderRadius: '12px',
+            color: '#667eea',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.background = 'rgba(102, 126, 234, 0.2)';
+            e.target.style.transform = 'scale(1.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = 'rgba(102, 126, 234, 0.1)';
+            e.target.style.transform = 'scale(1)';
+          }}
         >
           <FaTimes />
         </button>
@@ -88,41 +113,88 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
       
       {unreadNotifications.length === 0 ? (
         <div 
-          className="text-center text-muted"
-          style={{ padding: '2rem' }}
+          className="text-center"
+          style={{ 
+            padding: '3rem 2rem',
+            background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%)'
+          }}
         >
-          <FaBell size={24} className="mb-2" />
-          <p className="mb-0">No new notifications</p>
+          <div 
+            style={{
+              width: '80px',
+              height: '80px',
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 1rem',
+              boxShadow: '0 15px 35px rgba(102, 126, 234, 0.3)'
+            }}
+          >
+            <FaBell size={32} color="white" />
+          </div>
+          <h6 className="fw-bold mb-2" style={{ color: '#667eea' }}>All Caught Up! 🎉</h6>
+          <p className="mb-0 text-muted">No new notifications to show</p>
         </div>
       ) : (
-        <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+        <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
           {unreadNotifications.map((notification) => (
             <div
               key={notification.id}
               style={{
-                padding: '1rem',
+                padding: '1.5rem',
                 borderBottom: '1px solid #f1f5f9',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
-                background: notification.read ? 'white' : 'linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%)',
-                borderLeft: notification.read ? 'none' : '4px solid #667eea'
+                background: notification.read ? 'transparent' : 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.05) 100%)',
+                borderLeft: notification.read ? 'none' : '6px solid #667eea',
+                borderRadius: notification.read ? '0' : '0 16px 16px 0',
+                margin: notification.read ? '0' : '0 0 0 -1px'
               }}
               onClick={() => onMarkAsRead(notification.id)}
               onMouseEnter={(e) => {
-                e.target.style.background = 'linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%)';
+                e.target.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.1) 100%)';
+                e.target.style.transform = 'translateX(5px)';
               }}
               onMouseLeave={(e) => {
-                e.target.style.background = notification.read ? 'white' : 'linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%)';
+                e.target.style.background = notification.read ? 'transparent' : 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.05) 100%)';
+                e.target.style.transform = 'translateX(0)';
               }}
             >
               <div className="d-flex align-items-start">
-                <div className="me-3 mt-1">
+                <div 
+                  className="me-3 mt-1"
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 8px 20px rgba(102, 126, 234, 0.3)'
+                  }}
+                >
                   {getNotificationIcon(notification.type)}
                 </div>
                 <div className="flex-grow-1">
-                  <h6 className="mb-1 fw-bold">{notification.title}</h6>
-                  <p className="mb-1 text-muted small">{notification.message}</p>
-                  <small className="text-secondary">
+                  <h6 className="mb-2 fw-bold" style={{ color: '#2d3748' }}>
+                    {notification.title}
+                  </h6>
+                  <p className="mb-2 text-muted" style={{ fontSize: '0.9rem', lineHeight: '1.4' }}>
+                    {notification.message}
+                  </p>
+                  <small 
+                    className="fw-semibold"
+                    style={{ 
+                      color: '#667eea',
+                      background: 'rgba(102, 126, 234, 0.1)',
+                      padding: '4px 8px',
+                      borderRadius: '8px',
+                      fontSize: '0.75rem'
+                    }}
+                  >
                     {formatTime(notification.createdAt)}
                   </small>
                 </div>

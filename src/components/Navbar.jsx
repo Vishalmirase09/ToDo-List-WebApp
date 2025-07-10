@@ -93,30 +93,43 @@ const Navbar = ({ notifications, onMarkAsRead }) => {
                   cursor: 'pointer',
                   padding: '8px',
                   borderRadius: '50%',
-                  background: 'rgba(255, 255, 255, 0.2)',
+                  background: 'rgba(255, 255, 255, 0.15)',
                   transition: 'all 0.3s ease',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = 'rgba(255, 255, 255, 0.25)';
+                  e.target.style.transform = 'scale(1.1)';
+                  e.target.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'rgba(255, 255, 255, 0.15)';
+                  e.target.style.transform = 'scale(1)';
+                  e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
                 }}
               >
-                <FaBell size={20} />
+                <FaBell size={22} />
                 {unreadCount > 0 && (
                   <span 
                     className="notification-badge"
                     style={{
                       position: 'absolute',
-                      top: '-2px',
-                      right: '-2px',
-                      background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                      top: '-4px',
+                      right: '-4px',
+                      background: 'linear-gradient(135deg, #ff6b6b 0%, #feca57 100%)',
                       color: 'white',
                       borderRadius: '50%',
-                      padding: '4px 8px',
-                      fontSize: '0.7rem',
+                      padding: '6px 10px',
+                      fontSize: '0.75rem',
                       fontWeight: 'bold',
-                      minWidth: '20px',
+                      minWidth: '24px',
                       textAlign: 'center',
-                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
+                      boxShadow: '0 4px 15px rgba(255, 107, 107, 0.4)',
+                      border: '2px solid white',
+                      animation: 'glow 2s ease-in-out infinite alternate'
                     }}
                   >
                     {unreadCount > 9 ? '9+' : unreadCount}
