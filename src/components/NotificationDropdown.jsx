@@ -59,21 +59,20 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
   return (
     <div 
       ref={dropdownRef} 
-      className="fade-in"
       style={{ 
         position: 'absolute',
-        top: '100%',
+        top: 'calc(100% + 10px)',
         right: 0,
-        zIndex: 99999,
-        marginTop: '8px',
-        minWidth: '350px',
+        zIndex: 9999,
+        width: '350px',
         maxWidth: '400px',
         background: 'white',
         borderRadius: '16px',
         boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
         border: '1px solid rgba(0, 0, 0, 0.1)',
         maxHeight: '500px',
-        overflowY: 'auto'
+        overflowY: 'auto',
+        animation: 'fadeIn 0.3s ease-out'
       }}
     >
       <div className="d-flex justify-content-between align-items-center p-3 border-bottom">
@@ -81,23 +80,40 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
         <button
           className="btn btn-sm btn-outline-secondary"
           onClick={onClose}
+          style={{ border: 'none', background: 'transparent' }}
         >
           <FaTimes />
         </button>
       </div>
       
       {unreadNotifications.length === 0 ? (
-        <div className="p-3 text-center text-muted">
+        <div 
+          className="text-center text-muted"
+          style={{ padding: '2rem' }}
+        >
           <FaBell size={24} className="mb-2" />
           <p className="mb-0">No new notifications</p>
         </div>
       ) : (
-        <div className="overflow-auto" style={{ maxHeight: '300px' }}>
+        <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
           {unreadNotifications.map((notification) => (
             <div
               key={notification.id}
-              className={`notification-item ${notification.read ? '' : 'unread'}`}
+              style={{
+                padding: '1rem',
+                borderBottom: '1px solid #f1f5f9',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                background: notification.read ? 'white' : 'linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%)',
+                borderLeft: notification.read ? 'none' : '4px solid #667eea'
+              }}
               onClick={() => onMarkAsRead(notification.id)}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = notification.read ? 'white' : 'linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%)';
+              }}
             >
               <div className="d-flex align-items-start">
                 <div className="me-3 mt-1">
