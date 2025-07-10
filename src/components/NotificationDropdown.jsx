@@ -64,8 +64,9 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
         position: 'absolute',
         top: '100%',
         right: 0,
-        zIndex: 9999,
-        marginTop: '8px'
+        zIndex: 99999,
+        marginTop: '8px',
+        minWidth: '350px'
       }}
     >
       <div className="d-flex justify-content-between align-items-center p-3 border-bottom">

@@ -86,7 +86,7 @@ const Navbar = ({ notifications, onMarkAsRead }) => {
               <div
                 className="notification-bell text-white"
                 onClick={handleNotificationClick}
-                style={{ cursor: 'pointer', zIndex: 9998 }}
+                style={{ cursor: 'pointer', zIndex: 99998 }}
               >
                 <FaBell size={20} />
                 {unreadCount > 0 && (
