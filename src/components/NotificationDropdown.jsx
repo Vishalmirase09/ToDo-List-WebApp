@@ -81,11 +81,15 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
         className="d-flex justify-content-between align-items-center p-4"
         style={{ 
           borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
-          background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',
+          background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(240, 147, 251, 0.15) 100%)',
           borderRadius: '24px 24px 0 0'
         }}
       >
-        <h6 className="mb-0 fw-bold" style={{ color: '#667eea' }}>
+        <h6 className="mb-0 fw-bold" style={{ 
+          background: 'linear-gradient(135deg, #667eea 0%, #f093fb 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
+        }}>
           🔔 Notifications
         </h6>
         <button
@@ -93,7 +97,7 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
           onClick={onClose}
           style={{ 
             border: 'none', 
-            background: 'rgba(102, 126, 234, 0.1)',
+            background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%)',
             borderRadius: '12px',
             color: '#667eea',
             transition: 'all 0.3s ease'
@@ -116,7 +120,7 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
           className="text-center"
           style={{ 
             padding: '3rem 2rem',
-            background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%)'
+            background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(240, 147, 251, 0.08) 100%)'
           }}
         >
           <div 
@@ -124,17 +128,21 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
               width: '80px',
               height: '80px',
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              background: 'linear-gradient(135deg, #667eea 0%, #f093fb 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 1rem',
-              boxShadow: '0 15px 35px rgba(102, 126, 234, 0.3)'
+              boxShadow: '0 15px 35px rgba(102, 126, 234, 0.4)'
             }}
           >
             <FaBell size={32} color="white" />
           </div>
-          <h6 className="fw-bold mb-2" style={{ color: '#667eea' }}>All Caught Up! 🎉</h6>
+          <h6 className="fw-bold mb-2" style={{ 
+            background: 'linear-gradient(135deg, #667eea 0%, #f093fb 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>All Caught Up! 🎉</h6>
           <p className="mb-0 text-muted">No new notifications to show</p>
         </div>
       ) : (
@@ -147,18 +155,19 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
                 borderBottom: '1px solid #f1f5f9',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
-                background: notification.read ? 'transparent' : 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.05) 100%)',
-                borderLeft: notification.read ? 'none' : '6px solid #667eea',
+                background: notification.read ? 'transparent' : 'linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(240, 147, 251, 0.08) 100%)',
+                borderLeft: notification.read ? 'none' : '6px solid transparent',
+                borderImage: notification.read ? 'none' : 'linear-gradient(135deg, #667eea 0%, #f093fb 100%) 1',
                 borderRadius: notification.read ? '0' : '0 16px 16px 0',
                 margin: notification.read ? '0' : '0 0 0 -1px'
               }}
               onClick={() => onMarkAsRead(notification.id)}
               onMouseEnter={(e) => {
-                e.target.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.1) 100%)';
+                e.target.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.18) 0%, rgba(240, 147, 251, 0.12) 100%)';
                 e.target.style.transform = 'translateX(5px)';
               }}
               onMouseLeave={(e) => {
-                e.target.style.background = notification.read ? 'transparent' : 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.05) 100%)';
+                e.target.style.background = notification.read ? 'transparent' : 'linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(240, 147, 251, 0.08) 100%)';
                 e.target.style.transform = 'translateX(0)';
               }}
             >
@@ -169,7 +178,7 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
                     width: '40px',
                     height: '40px',
                     borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    background: 'linear-gradient(135deg, #667eea 0%, #f093fb 100%)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -188,8 +197,8 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
                   <small 
                     className="fw-semibold"
                     style={{ 
+                      background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(240, 147, 251, 0.15) 100%)',
                       color: '#667eea',
-                      background: 'rgba(102, 126, 234, 0.1)',
                       padding: '4px 8px',
                       borderRadius: '8px',
                       fontSize: '0.75rem'
