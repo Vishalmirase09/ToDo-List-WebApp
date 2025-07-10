@@ -59,14 +59,21 @@ const NotificationDropdown = ({ notifications, onMarkAsRead, onClose }) => {
   return (
     <div 
       ref={dropdownRef} 
-      className="notification-dropdown fade-in"
+      className="fade-in"
       style={{ 
         position: 'absolute',
         top: '100%',
         right: 0,
         zIndex: 99999,
         marginTop: '8px',
-        minWidth: '350px'
+        minWidth: '350px',
+        maxWidth: '400px',
+        background: 'white',
+        borderRadius: '16px',
+        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
+        border: '1px solid rgba(0, 0, 0, 0.1)',
+        maxHeight: '500px',
+        overflowY: 'auto'
       }}
     >
       <div className="d-flex justify-content-between align-items-center p-3 border-bottom">
